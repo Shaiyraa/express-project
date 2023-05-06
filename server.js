@@ -1,24 +1,19 @@
 const express = require('express');
-const friendsController = require('./controllers/friends.controller')
+const friendsRouter = require('./routes/friends.router');
 
 const app = express();
-
 const PORT = 3000;
-
 
 app.use((req, res, next) => {
   const reqStart = Date.now();
   next();
   
   const delta = Date.now() - reqStart;
-  console.log(`${req.method} ${req.url} | ${delta}ms`);
+  console.log(`${req.method} ${req.baseUrl}${req.url} | ${delta}ms`);
 })
-
 app.use(express.json());
 
-app.post('/friends', friendsController.postFriend);
-app.get('/friends', friendsController.getFriends);
-app.get('/friends/:id', friendsController.getFriend);
+app.use('/friends', friendsRouter);
 
 app.get('/', (req, res) => {
   res.send("Hello World");
