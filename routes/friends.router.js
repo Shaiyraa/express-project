@@ -1,5 +1,9 @@
 const express = require('express');
-const { postFriend, getFriends, getFriend } = require('../controllers/friends.controller')
+const {
+  postFriend,
+  getFriends,
+  getFriend,
+} = require('../controllers/friends.controller');
 
 const router = express.Router();
 

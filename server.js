@@ -1,5 +1,6 @@
 const express = require('express');
 const friendsRouter = require('./routes/friends.router');
+const messagesRouter = require('./routes/messages.router');
 
 const app = express();
 const PORT = 3000;
@@ -7,16 +8,17 @@ const PORT = 3000;
 app.use((req, res, next) => {
   const reqStart = Date.now();
   next();
-  
+
   const delta = Date.now() - reqStart;
   console.log(`${req.method} ${req.baseUrl}${req.url} | ${delta}ms`);
-})
+});
 app.use(express.json());
 
 app.use('/friends', friendsRouter);
+app.use('/messages', messagesRouter);
 
 app.get('/', (req, res) => {
-  res.send("Hello World");
+  res.send('Hello World');
 });
 
 app.listen(PORT, () => {
